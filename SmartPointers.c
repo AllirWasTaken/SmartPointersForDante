@@ -49,7 +49,7 @@ void __attribute__((destructor)) pointerDestr(void) {
                 found = 1;
                 if(pointerManager.echo)printf("ZNALEZIONE NIEZWOLNIONE BLOKI:\n");
             }
-            if(pointerManager.echo)printf("ADRES: 0x%p\nROZMIAR:%llu bajt\nZAALOKOWANY PRZEZ FUNKCJE: %s()\nW LINI: %llu\n",
+            if(pointerManager.echo)printf("\nADRES: 0x%p\nROZMIAR:%llu bajt\nZAALOKOWANY PRZEZ FUNKCJE: %s()\nW LINI: %llu\n",
                    (pointerManager.tab+i)->pointer, (pointerManager.tab+i)->size,(pointerManager.tab+i)->funcName,(pointerManager.tab+i)->line);
             free((pointerManager.tab+i)->pointer);
             (pointerManager.tab+i)->pointer=NULL;
