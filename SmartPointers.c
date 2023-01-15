@@ -135,7 +135,7 @@ void *s_realloc(void *mem, size_t size, const char *func, size_t line) {
     }
 
     if (oldMem->size >= size) {
-        pointerManager.currentSize-=oldMem->size-size;
+        pointerManager.currentSize -= oldMem->size - size;
         oldMem->size = size;
         return mem;
     }
@@ -147,7 +147,7 @@ void *s_realloc(void *mem, size_t size, const char *func, size_t line) {
 
     void *temp = malloc(oldMem->size);
     memcpy(temp, oldMem->pointer, oldMem->size);
-    pointerManager.currentSize+=size-oldMem->size;
+    pointerManager.currentSize += size - oldMem->size;
     s_free(mem);
     void *result = realloc(temp, size);
 
