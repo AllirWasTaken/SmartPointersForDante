@@ -19,7 +19,7 @@ int main() {
     test();
 
 
-    s_free_all();
+
 
 
     return 0;
