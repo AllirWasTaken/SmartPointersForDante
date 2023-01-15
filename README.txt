@@ -14,3 +14,5 @@ s_free_all() - czyści wszystkie zaalokowane obszary pamięci
 Program dodatkowo prócz wykrywania wycieków automatycznie wszystkie wycieki czyści, więc w konsekwencji tego nie trzeba
 w ogóle w programie używać free, natomiast jest wskazane żeby nie nadużywać tego, czy też nie wrzucać tego wprost to dante
 bo plagiat lub tłumaczenie się jak to działa
+
+w main.c przykładowe użycie
