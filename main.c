@@ -29,7 +29,23 @@ int main() {
 
     s_show_blocks();
 
+    int**tob;
+    tob=malloc(sizeof(int*)*5);
+    for(int i=0;i<5;i++){
+        tob[i]=malloc(sizeof(int)*5);
+    }
 
+    for(int y=0;y<5;y++){
+        for(int x=0;x<5;x++){
+            tob[y][x]=x*y;
+        }
+    }
+
+    for(int y=0;y<5;y++){
+        for(int x=0;x<5;x++){
+            printf("%d ",tob[y][x]);
+        }
+    }
 
     malloc(sizeof(int)*60);
 
