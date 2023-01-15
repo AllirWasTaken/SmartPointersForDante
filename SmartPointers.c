@@ -217,5 +217,5 @@ void s_status_of_allocation(){
         }
     }
 
-    printf("ILOSC BLOKOW PAMIECI %llu\n",count);
+    printf("ILOSC BLOKOW PAMIECI: %llu\n",count);
 }
