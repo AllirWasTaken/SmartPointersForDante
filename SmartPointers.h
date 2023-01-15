@@ -13,17 +13,13 @@
 
 
 void *s_malloc(size_t size, const char *func, size_t line);
-
 void *s_realloc(void *mem, size_t size, const char *func, size_t line);
-
 void *s_calloc(size_t numberOfElements, size_t sizeOfElement, const char *func, size_t line);
-
 void s_free(void *adres);
 
+
 void s_echo(int x);
-
 void s_set_allocation_limit(size_t bytes);
-
 void s_free_all();
 
 
