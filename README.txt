@@ -1,5 +1,7 @@
 biblioteka głownie używana do debugowania wycieków pamięci czy sprawdzania zachowania programu przy ograniczonej liczbie bajtów
 
+Biblioteke można na bierząco dodawać i usuwać (includować) nie powinna ona zmienić działania programu w żaden sposób
+
 Zredefiniowane funkcje(używać tak jak stare):
 malloc
 calloc
