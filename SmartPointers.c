@@ -190,7 +190,6 @@ void s_show_blocks(){
                 printf("\nADRES: 0x%p\nROZMIAR:%llu bajt\nZAALOKOWANY PRZEZ FUNKCJE: %s()\nW LINI: %llu\n",
                        (pointerManager.tab + i)->pointer, (pointerManager.tab + i)->size,
                        (pointerManager.tab + i)->funcName, (pointerManager.tab + i)->line);
-            s_free((pointerManager.tab + i)->pointer);
         }
     }
     if(!found)printf("BRAK\n");
