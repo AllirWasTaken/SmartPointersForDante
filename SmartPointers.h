@@ -5,9 +5,9 @@
 #define DEFAULT_ALLOCATION_LIMIT 1844674407370955161
 
 #define malloc(size) s_malloc(size,__func__,__LINE__)
-#define calloc(numberOfElements,sizeOfElement) s_calloc(x,y,__func__,__LINE__)
-#define free(adres) s_free(x)
-#define realloc(memory,newSize) s_realloc(x,y,__func__,__LINE__)
+#define calloc(numberOfElements,sizeOfElement) s_calloc(numberOfElements,sizeOfElement,__func__,__LINE__)
+#define free(adres) s_free(adres)
+#define realloc(memory,newSize) s_realloc(memory,newSize,__func__,__LINE__)
 
 
 void *s_malloc(size_t size, const char* func,size_t line);
