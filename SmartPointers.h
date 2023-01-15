@@ -21,6 +21,8 @@ void s_free(void *adres);
 void s_echo(int x);
 void s_set_allocation_limit(size_t bytes);
 void s_free_all();
+void s_show_blocks();
+void s_status_of_allocation();
 
 
 #endif //SMARTPOINTERS_SMARTPOINTERS_H

@@ -49,6 +49,7 @@ void __attribute__((destructor)) pointerDestr(void) {
             if (!found) {
                 found = 1;
                 if (pointerManager.echo)printf("ZNALEZIONE NIEZWOLNIONE BLOKI:\n");
+                s_status_of_allocation();
             }
             if (pointerManager.echo)
                 printf("\nADRES: 0x%p\nROZMIAR:%llu bajt\nZAALOKOWANY PRZEZ FUNKCJE: %s()\nW LINI: %llu\n",
@@ -137,6 +138,8 @@ void *s_realloc(void *mem, size_t size, const char *func, size_t line) {
     if (oldMem->size >= size) {
         pointerManager.currentSize -= oldMem->size - size;
         oldMem->size = size;
+        oldMem->line = line;
+        strcpy(oldMem->funcName, func);
         return mem;
     }
 
@@ -174,4 +177,27 @@ void s_free_all() {
     s_echo(0);
     pointerDestr();
     s_echo(temp);
+}
+
+void s_show_blocks(){
+    printf("\n##AKTUALNE_ZAALOKOWANE_BLOKI##\n");
+    int found = 0;
+    for (int i = 0; i < POINTER_LIMIT; i++) {
+        if ((pointerManager.tab + i)->pointer != NULL) {
+            if (!found) {
+                found = 1;
+            }
+                printf("\nADRES: 0x%p\nROZMIAR:%llu bajt\nZAALOKOWANY PRZEZ FUNKCJE: %s()\nW LINI: %llu\n",
+                       (pointerManager.tab + i)->pointer, (pointerManager.tab + i)->size,
+                       (pointerManager.tab + i)->funcName, (pointerManager.tab + i)->line);
+            s_free((pointerManager.tab + i)->pointer);
+        }
+    }
+    if(!found)printf("BRAK\n");
+    printf("##KONIEC_BLOKOW##\n");
+}
+
+
+void s_status_of_allocation(){
+    printf("\nZAALOKOWANA PAMIEC %llu/%llu bajt\n",pointerManager.currentSize,pointerManager.maxSize);
 }

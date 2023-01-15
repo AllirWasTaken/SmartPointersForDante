@@ -16,11 +16,19 @@ int main() {
     malloc(50);
     int *tab= realloc(NULL,30);
 
-   // free(tab);
+    free(tab);
 
     test();
 
+    s_status_of_allocation();
 
+    s_show_blocks();
+
+    s_free_all();
+
+    s_show_blocks();
+
+    malloc(sizeof(int)*60);
 
 
 
