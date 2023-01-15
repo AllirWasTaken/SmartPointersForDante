@@ -28,8 +28,13 @@ int main() {
 
     s_show_blocks();
 
+
+
     malloc(sizeof(int)*60);
 
+    free(0x564);
+    free(NULL);
+    realloc(0x325235,100);
 
 
     return 0;

@@ -55,7 +55,7 @@ void __attribute__((destructor)) pointerDestr(void) {
                 printf("\nADRES: 0x%p\nROZMIAR:%llu bajt\nZAALOKOWANY PRZEZ FUNKCJE: %s()\nW LINI: %llu\n",
                        (pointerManager.tab + i)->pointer, (pointerManager.tab + i)->size,
                        (pointerManager.tab + i)->funcName, (pointerManager.tab + i)->line);
-            s_free((pointerManager.tab + i)->pointer);
+            s_free((pointerManager.tab + i)->pointer,__func__ ,__LINE__);
         }
     }
     if (!found)if (pointerManager.echo)printf("WSZYSTKO ZOSTALO ZWOLNIONE\n");
@@ -70,7 +70,7 @@ struct singlePointer *FindFreePointer() {
     }
 
     if (pointerManager.echo)
-        printf("\nSmartPointers are out of pointers, consider modifying POINTER_LIMIT in SmartPointers.h\n");
+        printf("\n#\nSmartPointers are out of pointers, consider modifying POINTER_LIMIT in SmartPointers.h\n#\n");
     return NULL;
 }
 
@@ -99,7 +99,11 @@ void *s_calloc(size_t numberOfElements, size_t sizeOfElement, const char *func, 
     return temp;
 }
 
-void s_free(void *adres) {
+void s_free(void *adres, const char *func, size_t line) {
+
+    if(adres==NULL){
+        if(pointerManager.echo)printf("\n#\nSmartPointers proba uzycia free na wskazniku typu NULL\nFunkcja:%s()\nLinia:%llu\n#\n",func,line);
+    }
     int found = 0;
     for (int i = 0; i < POINTER_LIMIT; i++) {
         if ((pointerManager.tab + i)->pointer == adres) {
@@ -112,7 +116,7 @@ void s_free(void *adres) {
         }
     }
     if (!found) {
-        if (pointerManager.echo)printf("\nSmartPointers free SIGSEGV, nie ma pamieci o takim adresie\n");
+        if (pointerManager.echo)printf("\n#\nSmartPointers free SIGSEGV, nie ma pamieci o takim adresie\nFunkcja:%s()\n Linia:%llu\n#\n",func,line);
         return;
     }
 }
@@ -131,7 +135,7 @@ void *s_realloc(void *mem, size_t size, const char *func, size_t line) {
         }
     }
     if (!oldMem) {
-        if (pointerManager.echo)printf("\nSmartPointers realloc SIGSEGV, nie ma pamieci o takim adresie\n");
+        if (pointerManager.echo)printf("\n#\nSmartPointers realloc SIGSEGV, nie ma pamieci o takim adresie\nFunkcja:%s()\n Linia:%llu\n#\n",func,line);
         return NULL;
     }
 
@@ -151,7 +155,7 @@ void *s_realloc(void *mem, size_t size, const char *func, size_t line) {
     void *temp = malloc(oldMem->size);
     memcpy(temp, oldMem->pointer, oldMem->size);
     pointerManager.currentSize += size - oldMem->size;
-    s_free(mem);
+    s_free(mem,func,line);
     void *result = realloc(temp, size);
 
     {
