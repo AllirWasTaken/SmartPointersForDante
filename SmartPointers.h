@@ -1,6 +1,9 @@
 #ifndef SMARTPOINTERS_SMARTPOINTERS_H
 #define SMARTPOINTERS_SMARTPOINTERS_H
 
+//Najnowsza wersja na github https://github.com/AllirWasTaken/SmartPointersForDante
+//Kontakt przez discord Allir#6716
+
 #include <stddef.h>
 
 #define POINTER_LIMIT 65536
