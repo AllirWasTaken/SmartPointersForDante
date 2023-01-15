@@ -54,8 +54,7 @@ void __attribute__((destructor)) pointerDestr(void) {
                 printf("\nADRES: 0x%p\nROZMIAR:%llu bajt\nZAALOKOWANY PRZEZ FUNKCJE: %s()\nW LINI: %llu\n",
                        (pointerManager.tab + i)->pointer, (pointerManager.tab + i)->size,
                        (pointerManager.tab + i)->funcName, (pointerManager.tab + i)->line);
-            free((pointerManager.tab + i)->pointer);
-            (pointerManager.tab + i)->pointer = NULL;
+            s_free((pointerManager.tab + i)->pointer);
         }
     }
     if (!found)if (pointerManager.echo)printf("WSZYSTKO ZOSTALO ZWOLNIONE\n");
@@ -136,6 +135,7 @@ void *s_realloc(void *mem, size_t size, const char *func, size_t line) {
     }
 
     if (oldMem->size >= size) {
+        pointerManager.currentSize-=oldMem->size-size;
         oldMem->size = size;
         return mem;
     }
@@ -147,10 +147,12 @@ void *s_realloc(void *mem, size_t size, const char *func, size_t line) {
 
     void *temp = malloc(oldMem->size);
     memcpy(temp, oldMem->pointer, oldMem->size);
+    pointerManager.currentSize+=size-oldMem->size;
     s_free(mem);
     void *result = realloc(temp, size);
 
     {
+
         struct singlePointer *tempPointer = FindFreePointer();
         if (tempPointer) {
             tempPointer->pointer = result;

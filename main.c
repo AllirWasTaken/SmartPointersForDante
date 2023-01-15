@@ -16,7 +16,7 @@ int main() {
     malloc(50);
     int *tab= realloc(NULL,30);
 
-    free(tab);
+   // free(tab);
 
     test();
 
