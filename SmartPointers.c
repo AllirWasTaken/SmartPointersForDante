@@ -209,4 +209,13 @@ void s_show_blocks(){
 
 void s_status_of_allocation(){
     printf("\nZAALOKOWANA PAMIEC %llu/%llu bajt\n",pointerManager.currentSize,pointerManager.maxSize);
+    size_t count=0;
+
+    for(int i=0;i<POINTER_LIMIT;i++){
+        if((pointerManager.tab+i)->pointer!=NULL){
+            count++;
+        }
+    }
+
+    printf("ILOSC BLOKOW PAMIECI %llu\n",count);
 }
