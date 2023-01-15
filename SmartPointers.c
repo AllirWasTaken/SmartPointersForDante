@@ -139,6 +139,12 @@ void *s_realloc(void *mem, size_t size, const char *func, size_t line) {
         return NULL;
     }
 
+    if(oldMem->size==size){
+        oldMem->line = line;
+        strcpy(oldMem->funcName, func);
+        return mem;
+    }
+
     if (oldMem->size >= size) {
         pointerManager.currentSize -= oldMem->size - size;
         oldMem->size = size;

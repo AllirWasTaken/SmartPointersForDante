@@ -18,6 +18,7 @@ int main() {
 
     free(tab);
 
+
     test();
 
     s_status_of_allocation();
